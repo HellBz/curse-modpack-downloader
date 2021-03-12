@@ -10,10 +10,17 @@ module.exports = async function getFileList(url) {
     try {
         let res = await requestPromise.get(url);
         let { document } = (new JSDOM(res)).window;
+        /*
         return Array.from(document.querySelectorAll('.twitch-link'))
         .map(link => { return {
             url: link.href,
             version: link.textContent.trim()
+        }});
+        */
+        return Array.from(document.querySelectorAll('.border-gray--100.text-charcoal'))
+        .map(link => { if ( link.outerText.includes('Server-Pack')) return {
+            url: link.href,
+            version: link.parentNode.firstElementChild.innerText
         }});
     }
     catch(err) {
