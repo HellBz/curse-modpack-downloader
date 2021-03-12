@@ -9,6 +9,7 @@ const { JSDOM } = require('jsdom');
 const requestPromise = require('request-promise-native');
 
 const BASE_URL = "https://minecraft.curseforge.com";
+const MOD_URL = "https://www.curseforge.com/minecraft/modpacks";
 
 function createModpacksFolder() {
     try {
@@ -39,7 +40,7 @@ function createProjectFolder(projectName) {
  * @returns { { url: string, version: string } }
  */
 async function getLatestProjectFileUrl(project) {
-    const url = `${BASE_URL}/projects/${project}/files`;
+    const url = `${MOD_URL}/${project}/files/all`;
     /**@type {typeof getFileList} */
     let fileList;
     try {
